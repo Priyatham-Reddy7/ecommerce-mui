@@ -55,7 +55,7 @@ const Navbar = () => {
 
   return (
     <>
-        <AppBar sx={{background: '#000'}}>
+        <AppBar sx={{background: '#000'}} position='static' className="appbar" >
             <Toolbar>
                 { isMatch? 
                     <>
