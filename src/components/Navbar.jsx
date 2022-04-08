@@ -3,13 +3,16 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react"
 import DrawerComp from "./DrawerComp";
+import Link from '@mui/material/Link';
+import { useNavigate } from "react-router-dom";
 
-const linksArray = ['Home', 'Account', 'Orders', 'Cart']
 
 const Navbar = () => {
 
   const [value, setValue] = useState()
   const theme = useTheme()
+  let navigate = useNavigate()
+
   //Gets triggered when screen size is small
   const isMatch = useMediaQuery(theme.breakpoints.down('md'))
 
@@ -59,15 +62,15 @@ const Navbar = () => {
             <Toolbar>
                 { isMatch? 
                     <>
-                        <IconButton sx={{color: 'white'}}>
+                        <IconButton sx={{color: 'white'}} onClick={() => navigate('/')}>
                             <i className="fa-brands fa-shopify"></i>
                             Shopify
                         </IconButton>
-                        <DrawerComp linksArray={linksArray}/>
+                        <DrawerComp />
                     </> : 
                     <Grid sx={{placeItems: 'center'}} container>
                         <Grid item xs={2}>
-                            <IconButton sx={{color: 'white'}}>
+                            <IconButton sx={{color: 'white'}} onClick={() => navigate('/')} >
                                 <i className="fa-brands fa-shopify"></i>
                                 <span>Shopify</span>
                             </IconButton>
@@ -80,9 +83,12 @@ const Navbar = () => {
                                 onChange={(e, val) => setValue(val)}
                                 centered
                             >
-                                {linksArray.map((link, index) => (
-                                    <Tab value={index} key={index} label={link} />
-                                ))}
+                                <Link href='/' underline="none" color='white'>
+                                    <Tab value='0' key='0' label='Home'></Tab>
+                                </Link>
+                                <Tab value='1' key='1' label='Account' />
+                                <Tab value='2' key='2' label='Orders' />
+                                <Tab value='3' key='3' label='Cart' />
                             </Tabs>
                         </Grid>
                         <Grid item xs={1} />
